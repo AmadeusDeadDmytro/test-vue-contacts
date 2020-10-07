@@ -24,7 +24,7 @@
 	
 	.header {
 		h1 {
-			color: $grey;
+			color: $light;
 			width: 100%;
 			text-align: center;
 			font-size: 32px;

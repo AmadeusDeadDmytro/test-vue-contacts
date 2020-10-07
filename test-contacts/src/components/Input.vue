@@ -1,13 +1,19 @@
 <template>
 	<div class="input_block">
-		<label for="name">Name: </label>
-		<input id="name" class="input" type="text"/>
+		<label for="name">{{labelInput}}: </label>
+		<input id="name" class="input" type={{typeInput}}/>
 	</div>
 </template>
 
 <script>
 export default {
-
+	props:['label', 'type'],
+	data () {
+		return {
+			labelInput: this.label,
+			typeInput: this.type
+		}
+	}
 }
 </script>
 
@@ -21,7 +27,7 @@ export default {
 		margin: 20px 0;
 
 		label {
-			color: $light;
+			color: $grey;
 			margin-right: 20px;
 		}
 

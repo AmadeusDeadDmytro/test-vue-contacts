@@ -10,17 +10,30 @@
 			</li>
 		</ul>
 		<div class="contacts_add_btn">
-			<Button text="Add Contact"/>
+			<Button text="Add Contact" v-if="!isOpenAddForm" @click="openAddForm"/>
 		</div>
+
+		<AddContact v-if="isOpenAddForm"/>
 	</div>
 </template>
 
 <script>
 	import Button from '../components/Button'
+	import AddContact from '../components/AddContact'
 
 	export default {
 		name: 'Home',
-		components: {Button},
+		components: {Button, AddContact},
+		data () {
+			return {
+				isOpenAddForm: false
+			}
+		},
+		methods: {
+			openAddForm () {
+				this.isOpenAddForm = !this.isOpenAddForm
+			}
+		}
 	};
 </script>
 
