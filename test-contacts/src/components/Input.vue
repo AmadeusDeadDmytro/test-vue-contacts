@@ -1,7 +1,7 @@
 <template>
 	<div class="input_block">
 		<label for={{idInput}}>{{labelInput}}: </label>
-		<input id={{idInput}} class="input" type="text"/>
+		<input id={{idInput}} class="input" type="text" v-model="value" @keyup="emitToParent"/>
 	</div>
 </template>
 
@@ -10,8 +10,14 @@ export default {
 	props:['label', 'id'],
 	data () {
 		return {
+			value: '',
 			labelInput: this.label,
 			idInput: this.id
+		}
+	},
+	methods: {
+		emitToParent () {
+			this.$emit('handle-input', {id: this.idInput, text: this.value})
 		}
 	}
 }
@@ -29,6 +35,7 @@ export default {
 		label {
 			color: $grey;
 			margin-right: 20px;
+			min-width: 100px;
 		}
 
 		.input{
