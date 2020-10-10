@@ -1,10 +1,10 @@
 <template>
-	<div class="settings">
-		<div class="settings_form_group">
-			<div class="settings_fm_fields">
+	<div class="info">
+		<div class="info_form_group">
+			<div class="info_fm_fields">
 				
 			</div>
-			<Button text="Add Input" />
+			<Button text="Add Field" />
 		</div>
 	</div>
 </template>
@@ -14,7 +14,7 @@
 	import Button from '../components/Button'
 
 	export default {
-		name: 'Settings',
+		name: 'Info',
 		components: {Button},
 	};
 </script>
@@ -22,7 +22,7 @@
 <style lang="scss" scoped>
 	@import '../scss/colors';
 
-	.settings {
+	.info {
 		padding: 20px;
 		
 	}

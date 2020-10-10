@@ -6,7 +6,7 @@
 				<router-link to="/">home</router-link>
 			</div>			
 			<div class="header_link">
-				<router-link to="/settings">settings</router-link>
+				<router-link to="/info">info</router-link>
 			</div>
 		</div>
 	</div>

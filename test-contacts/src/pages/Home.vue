@@ -14,6 +14,8 @@
 		</div>
 
 		<AddContact v-if="isOpenAddForm"/>
+
+
 	</div>
 </template>
 
@@ -37,7 +39,7 @@
 	};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	@import '../scss/colors.scss';
 
 	.contacts {
@@ -46,9 +48,9 @@
 		.contacts_item{
 			padding: 20px 0px;
 			border-bottom: 1px solid $grey;
-			cursor: pointer;
 			display: flex;
 			justify-content: space-between;
+			align-items: center;
 
 			.contact_name{
 				color: $light;
@@ -57,6 +59,7 @@
 			.contact_icon{
 				filter: invert(1);
 				margin-left: 20px;
+				cursor: pointer;
 			}
 		}
 

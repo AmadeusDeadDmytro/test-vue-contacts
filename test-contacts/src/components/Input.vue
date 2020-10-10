@@ -1,17 +1,17 @@
 <template>
 	<div class="input_block">
-		<label for="name">{{labelInput}}: </label>
-		<input id="name" class="input" type={{typeInput}}/>
+		<label for={{idInput}}>{{labelInput}}: </label>
+		<input id={{idInput}} class="input" type="text"/>
 	</div>
 </template>
 
 <script>
 export default {
-	props:['label', 'type'],
+	props:['label', 'id'],
 	data () {
 		return {
 			labelInput: this.label,
-			typeInput: this.type
+			idInput: this.id
 		}
 	}
 }

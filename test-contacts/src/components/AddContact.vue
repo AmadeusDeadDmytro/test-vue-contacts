@@ -1,7 +1,7 @@
 <template>
 	<div class="add_form">
 		<p class="title">New Contact</p>
-		<Input label="Name" type="text"/>
+		<Input label="Name" id="name"/>
 		<div class="add_form_btns">
 			<Button text="Cancel"/>
 			<Button text="Save"/>
