@@ -11,10 +11,11 @@
 		</ul>
 
 		<div class="contacts_add_btn">
-			<Button text="Add Contact" v-if="!isOpenAddForm" @click="openAddForm"/>
+			<Button text="Add Contact" v-if="!this.$store.isOpenAddForm" @click="toggleAddForm"/>
 		</div>
+		<AddContact v-if="this.$store.isOpenAddForm"/>
 
-		<AddContact v-if="isOpenAddForm"/>
+
 	</div>
 </template>
 
@@ -31,10 +32,15 @@
 			}
 		},
 		methods: {
-			openAddForm () {
-				this.isOpenAddForm = !this.isOpenAddForm
+			toggleAddForm () {
+				console.log(this.$store.state.isOpenAddForm)
+				this.$store.commit('toggleAddForm')
+				console.log(this.$store.state.isOpenAddForm)
 			}
-		}
+		},
+		created(){
+			console.log(this.$store)
+		},
 	};
 </script>
 
