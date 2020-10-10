@@ -1,6 +1,7 @@
 <template>
 	<div class="info">
 		<div class="info_form_group">
+			<Modal />
 			<div class="info_fm_fields">
 				<h2 class="info_title_name">Annie Bing</h2>
 
@@ -52,11 +53,12 @@
 
 <script>
 	// import Input from '../components/Input'
-	import Button from '../components/Button'
+	import Button from '../components/Button';
+	import Modal from '../components/ConfirmModal';
 
 	export default {
 		name: 'Info',
-		components: {Button},
+		components: { Button, Modal },
 	};
 </script>
 

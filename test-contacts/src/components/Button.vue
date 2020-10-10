@@ -29,7 +29,7 @@ export default {
 			cursor: pointer;
 			transition: all .2s linear;
 
-			&:hover{
+			&:hover {
 				background-color: $light;
 				color:$dark;
 				border: 1px solid $dark;
