@@ -9,13 +9,12 @@
 				</div>
 			</li>
 		</ul>
+
 		<div class="contacts_add_btn">
 			<Button text="Add Contact" v-if="!isOpenAddForm" @click="openAddForm"/>
 		</div>
 
 		<AddContact v-if="isOpenAddForm"/>
-
-
 	</div>
 </template>
 
@@ -52,18 +51,18 @@
 			justify-content: space-between;
 			align-items: center;
 
-			.contact_name{
+			.contact_name {
 				color: $light;
 			}
 
-			.contact_icon{
+			.contact_icon {
 				filter: invert(1);
 				margin-left: 20px;
 				cursor: pointer;
 			}
 		}
 
-		.contacts_add_btn{
+		.contacts_add_btn {
 			display: flex;
 			justify-content: flex-end;
 			margin: 20px 0 0;
