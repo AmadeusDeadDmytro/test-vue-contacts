@@ -10,8 +10,9 @@ const routes = [
 		component: Home,
 	},
 	{
-		path: '/info',
+		path: '/info/:id',
 		component: Info,
+		props: true
 	},
 ];
 const router = createRouter({ history, routes });

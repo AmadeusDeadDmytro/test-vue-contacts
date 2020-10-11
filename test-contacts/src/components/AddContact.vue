@@ -19,6 +19,8 @@
 	import { useStore } from "vuex";
 	import { computed } from "vue";
 
+	import md5 from 'md5'
+
 	export default {
 		name: "Home",
 		components: { Input, Button },
@@ -41,15 +43,15 @@
 			};
 
 			const addContact = (form) => {
-				store.commit("addContact", {...form});
-
+				let contact = {...form}
+				contact.id = md5(contact.name + contact.telephone)
+				
+				store.commit("addContact", contact);
 			};
 			return { toggleAddForm, addContact, contacts };
 		},
 		methods: {
 			handleInput(value) {
-				console.log('contacts')
-				console.log(this.contacts)
 				this.form[value.id] = value.text
 			},
 		},

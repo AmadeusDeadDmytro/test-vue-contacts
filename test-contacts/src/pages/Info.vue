@@ -1,9 +1,8 @@
 <template>
 	<div class="info">
 		<div class="info_form_group">
-			<Modal />
 			<div class="info_fm_fields">
-				<h2 class="info_title_name">Annie Bing</h2>
+				<h2 class="info_title_name">{{ $route.params.name }}</h2>
 
 				<ul class="info_list">
 					<li class="info_item">
@@ -58,7 +57,10 @@
 
 	export default {
 		name: 'Info',
-		components: { Button, Modal },
+		components: {Button},
+		created(){
+			console.log(this.$route)
+		}
 	};
 </script>
 

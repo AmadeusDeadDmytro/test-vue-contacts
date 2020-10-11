@@ -4,11 +4,13 @@
 			<li class="contacts_item" v-for="contact in contacts" :key="contact.name">
 				<span class="contact_name">{{ contact.name }}</span>
 				<div class="contact_icons_block">
-					<img
-						class="contact_icon"
-						src="@/assets/visibility-24px.svg"
-						alt=""
-					/>
+					<router-link :to="{path: '/info/' + contact.id, props: {contact: contact}}">
+						<img
+							class="contact_icon"
+							src="@/assets/visibility-24px.svg"
+							alt=""
+						/>
+					</router-link>
 					<img
 						class="contact_icon"
 						src="@/assets/delete_forever-24px.svg"
@@ -48,9 +50,6 @@
 				store.commit("toggleAddForm");
 			};
 			return { isOpenAddForm, toggleAddForm, contacts };
-		},
-		created() {
-			console.log(this.$store);
 		},
 	};
 </script>
