@@ -46,7 +46,9 @@
 				</ul>
 
 			</div>
-			<Button text="Add Field" />
+			<AddField v-if="isOpenAddField" />
+			<Button text="Add Field" v-if="!isOpenAddField" @click="toggleAddField" />
+
 		</div>
 	</div>
 </template>
@@ -56,12 +58,15 @@
 	import Button from '../components/Button';
 	import EmptyField from '../components/EmptyField';
 	// import Modal from '../components/ConfirmModal';
+	import { useStore } from "vuex";
+	import { computed } from "vue";
+	import AddField from '../components/AddField';
 
 	export default {
 		name: 'Info',
-		components: {Button, EmptyField},
+		components: {Button, EmptyField, AddField},
         data(){
-			return{
+			return {
 				contactInfo: {},
 			}
         },
@@ -73,7 +78,19 @@
 					this.contactInfo = contacts[el];
 				}
 			})
-		}
+
+			this.$store.commit('hideAll')
+		},
+		setup() {
+			const store = useStore();
+			const isOpenAddField = computed(() => store.state.isOpenAddField);
+
+			const toggleAddField = () => {
+				console.log(isOpenAddField)
+				store.commit("toggleAddField");
+			};
+			return { isOpenAddField, toggleAddField };
+		},
 	};
 </script>
 

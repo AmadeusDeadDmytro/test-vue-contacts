@@ -11,7 +11,9 @@
 							alt=""
 						/>
 					</router-link>
+
 					<img
+						@click="openModal(contact.id)"
 						class="contact_icon"
 						src="@/assets/delete_forever-24px.svg"
 						alt=""
@@ -28,19 +30,42 @@
 			/>
 		</div>
 		<AddContact v-if="isOpenAddForm" />
+
+		<ConfirmModal @delete-agree="handleDelete" @close-modal="closeModal" v-if="isOpenModal" :id="id" question="Do you want to delete this contact ?" />
 	</div>
 </template>
 
 <script>
 	import Button from "../components/Button";
 	import AddContact from "../components/AddContact";
+	import ConfirmModal from "../components/ConfirmModal";
 
 	import { useStore } from "vuex";
 	import { computed } from "vue";
 
 	export default {
 		name: "Home",
-		components: { Button, AddContact },
+		components: { Button, AddContact, ConfirmModal },
+		data() {
+			return {
+				isOpenModal: false,
+				id: null
+			}
+		},
+		methods: {
+			openModal(id)  {
+				this.isOpenModal = true;
+				this.id = id;
+			},
+
+			closeModal(value) {
+				this.isOpenModal = value;
+			},
+			handleDelete(id) {
+				this.$store.commit("deleteContact", id);
+				this.isOpenModal = false;
+			}
+		},
 		setup() {
 			const store = useStore();
 			const isOpenAddForm = computed(() => store.state.isOpenAddForm);
@@ -51,6 +76,9 @@
 			};
 			return { isOpenAddForm, toggleAddForm, contacts };
 		},
+		created() {
+			this.$store.commit('hideAll')
+		}
 	};
 </script>
 

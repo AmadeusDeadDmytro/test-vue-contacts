@@ -1,18 +1,21 @@
 <template>
     <div class="confirm_modal">
-        <div  class="confirm_modal_background"></div>
+
         <div class="confirm_modal_wrap">
-            <h1 class="confirm_modal_title">Do you want to delete this contact ?</h1>
+            <h1 class="confirm_modal_title">{{ questionProp }}</h1>
 
             <div class="confirm_modal_btn">
                 <Button
                     text="no"
+                    @click="emitToParent"
                 />
                 <Button
                     text="yes"
+                    @click="agreeDelete"
                 />
             </div>
         </div>
+        <div @click="emitToParent" class="confirm_modal_background"></div>
     </div>
 </template>
 
@@ -22,6 +25,21 @@
     export default {
         name: "Home",
         components: { Button },
+        props: ['id', 'question'],
+        data() {
+            return {
+                contactId: this.id,
+                questionProp: this.question
+            }
+        },
+        methods: {
+            emitToParent () {
+                this.$emit('close-modal', false)
+            },
+            agreeDelete() {
+                this.$emit('delete-agree', this.contactId)
+            }
+        }
 
     };
 </script>
@@ -46,7 +64,7 @@
             display: flex;
             justify-content: center;
             position: fixed;
-            z-index: 1;
+            z-index: 500;
             padding: 0 40px;
             background-color: $dark;
             border: 1px solid $light;
