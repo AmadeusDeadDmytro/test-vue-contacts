@@ -9,12 +9,12 @@
 						<div class="info_text_block">
 							<img class="info_icon_tab" src="@/assets/keyboard_return-24px.svg">
 							<span class="info_name">address:</span>
-							<span class="info_value">{{ contactInfo.address }}</span>
+							<span class="info_value" v-if="contactInfo.address.length > 0">{{ contactInfo.address }}</span>
+							<EmptyField v-else/>
 						</div>
 
 						<div class="info_icons_block">
 							<img class="info_icon" src="@/assets/create-24px.svg" alt="">
-							<img class="info_icon" src="@/assets/delete_forever-24px.svg" alt="">
 						</div>
 					</li>
 
@@ -22,24 +22,25 @@
 						<div class="info_text_block">
 							<img class="info_icon_tab" src="@/assets/keyboard_return-24px.svg">
 							<span class="info_name">tel:</span>
-							<span class="info_value">{{ contactInfo.telephone }}</span>
+							<span class="info_value" v-if="contactInfo.telephone.length > 0">{{ contactInfo.telephone }}</span>
+							<EmptyField v-else/>
 						</div>
 
 						<div class="info_icons_block">
 							<img class="info_icon" src="@/assets/create-24px.svg" alt="">
-							<img class="info_icon" src="@/assets/delete_forever-24px.svg" alt="">
 						</div>
 					</li>
 					<li class="info_item">
 						<div class="info_text_block">
 							<img class="info_icon_tab" src="@/assets/keyboard_return-24px.svg">
 							<span class="info_name">email:</span>
-							<span class="info_value">{{ contactInfo.email }}</span>
+							<span class="info_value" v-if="contactInfo.email.length > 0">{{ contactInfo.email }}</span>
+							<EmptyField v-else/>
 						</div>
 
 						<div class="info_icons_block">
 							<img class="info_icon" src="@/assets/create-24px.svg" alt="">
-							<img class="info_icon" src="@/assets/delete_forever-24px.svg" alt="">
+<!--							<img class="info_icon" src="@/assets/delete_forever-24px.svg" alt="">-->
 						</div>
 					</li>
 				</ul>
@@ -53,11 +54,12 @@
 <script>
 	// import Input from '../components/Input'
 	import Button from '../components/Button';
+	import EmptyField from '../components/EmptyField';
 	// import Modal from '../components/ConfirmModal';
 
 	export default {
 		name: 'Info',
-		components: {Button},
+		components: {Button, EmptyField},
         data(){
 			return{
 				contactInfo: {},
@@ -108,6 +110,8 @@
 
 				.info_name {
 					padding: 0 10px;
+					min-width: 100px;
+					color: $grey;
 				}
 
 				.info_icon {
