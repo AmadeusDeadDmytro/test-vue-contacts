@@ -14,6 +14,10 @@ const routes = [
 		component: Info,
 		props: true
 	},
+	{
+		path: '/:catchAll(.*)',
+		component: Home
+	}
 ];
 const router = createRouter({ history, routes });
 

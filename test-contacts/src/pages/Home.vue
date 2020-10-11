@@ -4,7 +4,7 @@
 			<li class="contacts_item" v-for="contact in contacts" :key="contact.name">
 				<span class="contact_name">{{ contact.name }}</span>
 				<div class="contact_icons_block">
-					<router-link :to="{path: '/info/' + contact.id, props: {contact: contact}}">
+					<router-link :to="{path: '/info/' + contact.id}">
 						<img
 							class="contact_icon"
 							src="@/assets/visibility-24px.svg"

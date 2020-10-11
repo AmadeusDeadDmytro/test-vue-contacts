@@ -7,13 +7,9 @@
             <div class="confirm_modal_btn">
                 <Button
                     text="no"
-                    v-if="!isOpenAddForm"
-                    @click="toggleAddForm()"
                 />
                 <Button
                     text="yes"
-                    v-if="!isOpenAddForm"
-                    @click="toggleAddForm()"
                 />
             </div>
         </div>
@@ -46,7 +42,7 @@
 
         .confirm_modal_wrap {
             left: 50%;
-            top: 12%;
+            top: 42%;
             display: flex;
             justify-content: center;
             position: fixed;

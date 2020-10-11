@@ -1,19 +1,22 @@
 import { createStore } from 'vuex'
-
+import createPersistedState from 'vuex-persistedstate'
 
 const store = createStore({
 	state (){
 		return{
 			isOpenAddForm: false,
-			contacts: []
+			contacts: {}
 		}
 	},
+	plugins: [createPersistedState({
+		storage: window.sessionStorage,
+	})],
 	mutations: {
 		toggleAddForm: state => {
 			state.isOpenAddForm = !state.isOpenAddForm
 		},
 		addContact: (state, contact) => {
-			state.contacts = [...state.contacts, contact]
+			state.contacts[contact.id] = contact 
 		}
 	},
 }) 

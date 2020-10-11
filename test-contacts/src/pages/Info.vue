@@ -2,14 +2,14 @@
 	<div class="info">
 		<div class="info_form_group">
 			<div class="info_fm_fields">
-				<h2 class="info_title_name">{{ $route.params.name }}</h2>
+				<h2 class="info_title_name">{{ contactInfo.name }}</h2>
 
 				<ul class="info_list">
 					<li class="info_item">
 						<div class="info_text_block">
 							<img class="info_icon_tab" src="@/assets/keyboard_return-24px.svg">
 							<span class="info_name">address:</span>
-							<span class="info_value">Макарова 6 кв 55</span>
+							<span class="info_value">{{ contactInfo.address }}</span>
 						</div>
 
 						<div class="info_icons_block">
@@ -22,7 +22,7 @@
 						<div class="info_text_block">
 							<img class="info_icon_tab" src="@/assets/keyboard_return-24px.svg">
 							<span class="info_name">tel:</span>
-							<span class="info_value">+380 (067) 6789874</span>
+							<span class="info_value">{{ contactInfo.telephone }}</span>
 						</div>
 
 						<div class="info_icons_block">
@@ -34,7 +34,7 @@
 						<div class="info_text_block">
 							<img class="info_icon_tab" src="@/assets/keyboard_return-24px.svg">
 							<span class="info_name">email:</span>
-							<span class="info_value">test@gmail.com</span>
+							<span class="info_value">{{ contactInfo.email }}</span>
 						</div>
 
 						<div class="info_icons_block">
@@ -46,7 +46,6 @@
 
 			</div>
 			<Button text="Add Field" />
-            <Modal/>
 		</div>
 	</div>
 </template>
@@ -54,13 +53,24 @@
 <script>
 	// import Input from '../components/Input'
 	import Button from '../components/Button';
-	import Modal from '../components/ConfirmModal';
+	// import Modal from '../components/ConfirmModal';
 
 	export default {
 		name: 'Info',
-		components: {Button, Modal},
+		components: {Button},
+        data(){
+			return{
+				contactInfo: {},
+			}
+        },
 		created(){
-			console.log(this.$route)
+			const contacts = this.$store.state.contacts
+
+			Object.keys(contacts).forEach(el => {
+				if(contacts[el].id === this.$route.params.id){
+					this.contactInfo = contacts[el];
+				}
+			})
 		}
 	};
 </script>

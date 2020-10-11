@@ -45,8 +45,8 @@
 			const addContact = (form) => {
 				let contact = {...form}
 				contact.id = md5(contact.name + contact.telephone)
-				
 				store.commit("addContact", contact);
+				store.commit("toggleAddForm");
 			};
 			return { toggleAddForm, addContact, contacts };
 		},
