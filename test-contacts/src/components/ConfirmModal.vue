@@ -6,29 +6,26 @@
 
             <div class="confirm_modal_btn">
                 <Button
-                        text="no"
-                        v-if="!isOpenAddForm"
-                        @click="toggleAddForm()"
+                    text="no"
+                    v-if="!isOpenAddForm"
+                    @click="toggleAddForm()"
                 />
                 <Button
-                        text="yes"
-                        v-if="!isOpenAddForm"
-                        @click="toggleAddForm()"
+                    text="yes"
+                    v-if="!isOpenAddForm"
+                    @click="toggleAddForm()"
                 />
             </div>
         </div>
-
-        <AddContact v-if="isOpenAddForm" />
     </div>
 </template>
 
 <script>
     import Button from "../components/Button";
-    import AddContact from "../components/AddContact";
 
     export default {
         name: "Home",
-        components: { Button, AddContact },
+        components: { Button },
 
     };
 </script>
@@ -48,7 +45,7 @@
         }
 
         .confirm_modal_wrap {
-            left: 45%;
+            left: 50%;
             top: 12%;
             display: flex;
             justify-content: center;
@@ -57,13 +54,13 @@
             padding: 0 40px;
             background-color: $dark;
             border: 1px solid $light;
-            box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             box-sizing: border-box;
             transition: all 0.3s ease-out;
             flex-direction: column;
             max-width: 450px;
             color: $light;
+            transform: translateX(-50%);
 
             .confirm_modal_title {
                 font-size: 24px;

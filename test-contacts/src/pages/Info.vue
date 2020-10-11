@@ -46,6 +46,7 @@
 
 			</div>
 			<Button text="Add Field" />
+            <Modal/>
 		</div>
 	</div>
 </template>
@@ -57,7 +58,7 @@
 
 	export default {
 		name: 'Info',
-		components: {Button},
+		components: {Button, Modal},
 		created(){
 			console.log(this.$route)
 		}
