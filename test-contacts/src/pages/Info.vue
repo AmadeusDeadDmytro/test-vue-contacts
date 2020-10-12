@@ -5,11 +5,11 @@
 				<h2 class="info_title_name">{{ contactInfo.name }}</h2>
 
 				<ul class="info_list">
-					<li class="info_item">
+					<li class="info_item" v-for=" [field, value] in Object.entries(contactInfo.options)" :key="field">
 						<div class="info_text_block">
-							<img class="info_icon_tab" src="@/assets/keyboard_return-24px.svg">
-							<span class="info_name">address:</span>
-							<span class="info_value" v-if="contactInfo.address.length > 0">{{ contactInfo.address }}</span>
+							<img class="info_icon_tab"  src="@/assets/keyboard_return-24px.svg">
+							<span class="info_name">{{ field.charAt(0).toUpperCase() + field.slice(1)  }}:</span>
+							<span class="info_value" v-if="value && value.length > 0">{{ value }}</span>
 							<EmptyField v-else/>
 						</div>
 
@@ -18,35 +18,10 @@
 						</div>
 					</li>
 
-					<li class="info_item">
-						<div class="info_text_block">
-							<img class="info_icon_tab" src="@/assets/keyboard_return-24px.svg">
-							<span class="info_name">tel:</span>
-							<span class="info_value" v-if="contactInfo.telephone.length > 0">{{ contactInfo.telephone }}</span>
-							<EmptyField v-else/>
-						</div>
-
-						<div class="info_icons_block">
-							<img class="info_icon" src="@/assets/create-24px.svg" alt="">
-						</div>
-					</li>
-					<li class="info_item">
-						<div class="info_text_block">
-							<img class="info_icon_tab" src="@/assets/keyboard_return-24px.svg">
-							<span class="info_name">email:</span>
-							<span class="info_value" v-if="contactInfo.email.length > 0">{{ contactInfo.email }}</span>
-							<EmptyField v-else/>
-						</div>
-
-						<div class="info_icons_block">
-							<img class="info_icon" src="@/assets/create-24px.svg" alt="">
-<!--							<img class="info_icon" src="@/assets/delete_forever-24px.svg" alt="">-->
-						</div>
-					</li>
 				</ul>
 
 			</div>
-			<AddField v-if="isOpenAddField" />
+			<AddField v-if="isOpenAddField" :id="this.$route.params.id"/>
 			<Button text="Add Field" v-if="!isOpenAddField" @click="toggleAddField" />
 
 		</div>
@@ -64,29 +39,35 @@
 
 	export default {
 		name: 'Info',
-		components: {Button, EmptyField, AddField},
-        data(){
+		components: { Button, EmptyField, AddField },
+        data() {
 			return {
 				contactInfo: {},
+				fieldArray: []
 			}
         },
-		created(){
-			const contacts = this.$store.state.contacts
+		created() {
 
-			Object.keys(contacts).forEach(el => {
-				if(contacts[el].id === this.$route.params.id){
-					this.contactInfo = contacts[el];
-				}
+
+
+		},
+		updated: function () {
+			this.$nextTick(function () {
+				const contacts = this.$store.state.contacts;
+
+				Object.keys(contacts).forEach(el => {
+					if(contacts[el].id === this.$route.params.id){
+						this.contactInfo = contacts[el];
+					}
+				})
+				console.log(3)
 			})
-
-			this.$store.commit('hideAll')
 		},
 		setup() {
 			const store = useStore();
 			const isOpenAddField = computed(() => store.state.isOpenAddField);
 
 			const toggleAddField = () => {
-				console.log(isOpenAddField)
 				store.commit("toggleAddField");
 			};
 			return { isOpenAddField, toggleAddField };

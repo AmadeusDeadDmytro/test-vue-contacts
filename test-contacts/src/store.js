@@ -6,7 +6,8 @@ const store = createStore({
 		return {
 			isOpenAddForm: false,
 			contacts: {},
-			isOpenAddField: false
+			isOpenAddField: false,
+			fieldArray: ['Address', 'Telephone', 'Email']
 		}
 	},
 	plugins: [createPersistedState({
@@ -19,13 +20,27 @@ const store = createStore({
 		toggleAddField: state => {
 			state.isOpenAddField = !state.isOpenAddField
 		},
+		addNewField: (state, currentAddForm, id) => {
+			console.log(state, currentAddForm, id, 'state addNewField')
+			state.fieldArray.push(currentAddForm.name);
+
+			Object.keys(state.contacts).forEach(el => {
+				if (el !== id) {
+					state.contacts[el][currentAddForm.name] = ''
+				} else {
+					state.contacts[el][currentAddForm.name] = currentAddForm.value
+				}
+			})
+			state.isOpenAddField = !state.isOpenAddField;
+		},
 		addContact: (state, contact) => {
-			state.contacts[contact.id] = contact 
+			state.contacts[contact.id] = contact
 		},
 		deleteContact: (state, id) => {
-			const tmpState = {}
+			const tmpState = {};
+
 			Object.keys(state.contacts).forEach(el => {
-				if(el !== id){
+				if (el !== id) {
 					tmpState[el] = state.contacts[el]
 				}
 			})

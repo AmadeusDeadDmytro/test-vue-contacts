@@ -2,9 +2,8 @@
 	<div class="add_form">
 		<p class="title">New Contact</p>
 		<Input label="Name" id="name" @handle-input="handleInput" />
-		<Input label="Address" id="address" @handle-input="handleInput" />
-		<Input label="Telephone" id="telephone" @handle-input="handleInput" />
-		<Input label="Email" id="email" @handle-input="handleInput" />
+		<Input v-for="field in fieldArray" :label="field" :id="field.toLowerCase()" :key="field" @handle-input="handleInput" />
+
 		<div class="add_form_btns">
 			<Button text="Cancel" @click="toggleAddForm()" />
 			<Button text="Save" @click="addContact(form)" />
@@ -27,16 +26,14 @@
 		data() {
 			return {
 				form: {
-					name: "",
-					address: "",
-					telephone: "",
-					email: "",
+					options: {}
 				},
 			};
 		},
 		setup() {
 			const store = useStore();
 			const contacts = computed(() => store.state.contacts);
+			const fieldArray = computed(() => store.state.fieldArray);
 
 			const toggleAddForm = () => {
 				store.commit("toggleAddForm");
@@ -45,14 +42,20 @@
 			const addContact = (form) => {
 				let contact = {...form}
 				contact.id = md5(contact.name + contact.telephone)
+
 				store.commit("addContact", contact);
 				store.commit("toggleAddForm");
 			};
-			return { toggleAddForm, addContact, contacts };
+
+			return { toggleAddForm, addContact, contacts, fieldArray };
 		},
 		methods: {
 			handleInput(value) {
-				this.form[value.id] = value.text
+				if(value.id != 'name') {
+					this.form.options[value.id] = value.text
+				} else {
+					this.form[value.id] = value.text
+				}
 			},
 		},
 	};

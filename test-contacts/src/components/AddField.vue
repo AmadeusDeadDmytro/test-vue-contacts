@@ -6,7 +6,7 @@
 
         <div class="add_form_btns">
             <Button text="Cancel" @click="toggleAddField()" />
-            <Button text="Save" />
+            <Button text="Save" @click="addNewField(form, contactId)" />
         </div>
     </div>
 </template>
@@ -20,22 +20,29 @@
     export default {
         name: "Home",
         components: { Input, Button },
+        props: ['id'],
         data() {
             return {
                 form: {
                     name: "",
                     value: "",
                 },
+                contactId: this.id
             };
         },
         setup() {
             const store = useStore();
 
+            const addNewField = (form, contactId) => {
+                const currentAddForm = {...form};
+
+                store.commit('addNewField', currentAddForm, contactId);
+            }
             const toggleAddField = () => {
                 store.commit("toggleAddField");
             };
 
-            return { toggleAddField };
+            return { toggleAddField, addNewField };
         },
         methods: {
             handleInput(value) {
