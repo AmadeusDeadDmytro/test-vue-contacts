@@ -8,13 +8,20 @@
 					<li class="info_item" v-for=" [field, value] in Object.entries(contactInfo.options)" :key="field">
 						<div class="info_text_block">
 							<img class="info_icon_tab"  src="@/assets/keyboard_return-24px.svg">
-							<span class="info_name">{{ field.charAt(0).toUpperCase() + field.slice(1)  }}:</span>
-							<span class="info_value" v-if="value && value.length > 0">{{ value }}</span>
-							<EmptyField v-else/>
+
+							<span class="info_name">{{ field.charAt(0).toUpperCase() + field.slice(1)  }} :</span>
+
+							<Input v-if="field.isEditOpen"  label="field.charAt(0).toUpperCase() + field.slice(1)"  :valueInput="value" @handle-input="handleInput" />
+							
+							<div v-if="field.isEditOpen">
+								<span lass="info_value" v-if="value && value.length > 0">{{ value }}</span>
+
+								<EmptyField v-else/>
+							</div>
 						</div>
 
 						<div class="info_icons_block">
-							<img class="info_icon" src="@/assets/create-24px.svg" alt="">
+							<img class="info_icon" @click="editField(this.$route.params.id)" src="@/assets/create-24px.svg" alt="">
 <!--							<img class="info_icon" src="@/assets/delete_forever-24px.svg" alt="">-->
 						</div>
 					</li>
@@ -36,10 +43,11 @@
 	import { useStore } from "vuex";
 	import { computed } from "vue";
 	import AddField from '../components/AddField';
+	import Input from '../components/Input';
 
 	export default {
 		name: 'Info',
-		components: { Button, EmptyField, AddField },
+		components: { Button, EmptyField, AddField, Input },
         data() {
 			return {
 				contactInfo: {},
@@ -59,10 +67,14 @@
 			const store = useStore();
 			const isOpenAddField = computed(() => store.state.isOpenAddField);
 
+			const editField = (idContact) => {
+
+				store.commit("editField", idContact);
+			}
 			const toggleAddField = () => {
 				store.commit("toggleAddField");
 			};
-			return { isOpenAddField, toggleAddField };
+			return { isOpenAddField, toggleAddField, editField };
 		},
 	};
 </script>

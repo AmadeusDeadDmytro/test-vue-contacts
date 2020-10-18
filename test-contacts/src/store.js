@@ -35,6 +35,15 @@ const store = createStore({
 		addContact: (state, contact) => {
 			state.contacts[contact.id] = contact
 		},
+		editField: (state, currentId) => {
+			Object.keys(state.contacts).forEach(el => {
+				if (el !== currentId) {
+					state.contacts[el].options['isEditOpen'] = true
+				} else {
+					state.contacts[el].options['isEditOpen'] = false
+				}
+			})
+		},
 		deleteContact: (state, id) => {
 			const tmpState = {};
 
