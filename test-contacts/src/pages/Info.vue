@@ -15,7 +15,6 @@
 
 						<div class="info_icons_block">
 							<img class="info_icon" src="@/assets/create-24px.svg" alt="">
-<!--							<img class="info_icon" src="@/assets/delete_forever-24px.svg" alt="">-->
 						</div>
 					</li>
 				</ul>
