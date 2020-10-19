@@ -1,16 +1,17 @@
 <template>
 	<div class="input_block">
-		<label for={{idInput}}>{{labelInput}}: </label>
+
+		<label for={{idInput}} :class="label && 'isBlock'">{{labelInput}}: </label>
 		<input id={{idInput}} class="input" type="text" v-model="value" @keyup="emitToParent"/>
 	</div>
 </template>
 
 <script>
 export default {
-	props:['label', 'id'],
+	props:['label', 'id', 'valueInput'],
 	data () {
 		return {
-			value: '',
+			value: this.valueInput ? this.valueInput: '',
 			labelInput: this.label,
 			idInput: this.id
 		}
@@ -36,6 +37,10 @@ export default {
 			color: $grey;
 			margin-right: 20px;
 			min-width: 100px;
+		}
+
+		.isBlock {
+			display: none;
 		}
 
 		.input{
